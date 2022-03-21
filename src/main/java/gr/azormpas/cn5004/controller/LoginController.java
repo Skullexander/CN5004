@@ -1,4 +1,4 @@
-package gr.azormpas.cn5004;
+package gr.azormpas.cn5004.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
