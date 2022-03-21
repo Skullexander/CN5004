@@ -7,4 +7,6 @@ module gr.azormpas.cn5004 {
 
     opens gr.azormpas.cn5004 to javafx.fxml;
     exports gr.azormpas.cn5004;
+    exports gr.azormpas.cn5004.controller;
+    opens gr.azormpas.cn5004.controller to javafx.fxml;
 }
