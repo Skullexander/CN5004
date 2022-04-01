@@ -1,16 +1,20 @@
 package gr.azormpas.cn5004.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 public class LoginController
 {
-    @FXML
-    private Label welcomeText;
+    public TextField fldUsername;
 
-    @FXML
-    protected void onHelloButtonClick()
-    {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    public PasswordField fldPassword;
+
+    public CheckBox chkCredLogin;
+
+    public Button btnLogin;
+
+    public ChoiceBox choiceEntry;
 }
