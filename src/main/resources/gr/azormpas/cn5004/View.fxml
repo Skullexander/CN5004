@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr.azormpas.cn5004.controller.ViewController">
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr.azormpas.cn5004.controller.ViewController">
    <bottom>
       <ToolBar BorderPane.alignment="CENTER">
         <items>
