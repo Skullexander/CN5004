@@ -14,7 +14,7 @@ public class Main
     public void start(Stage stage)
         throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view/Login.fxml"));
         Scene      scene      = new Scene(fxmlLoader.load(), 320, 200);
         stage.setTitle("CN5004");
         stage.setResizable(false);
