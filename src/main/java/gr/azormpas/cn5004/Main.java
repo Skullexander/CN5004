@@ -15,7 +15,7 @@ public class Main
         throws IOException
     {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
-        Scene      scene      = new Scene(fxmlLoader.load());
+        Scene      scene      = new Scene(fxmlLoader.load(), 320, 200);
         stage.setTitle("CN5004");
         stage.setResizable(false);
         stage.setScene(scene);
