@@ -42,7 +42,7 @@ public class HomeController
         a.show();
     }
 
-    public void viewCRUD(ActionEvent event)
+    public void viewCRUD(ActionEvent ignoredEvent)
         throws IOException
     {
         if (sideView.getChildren().isEmpty())
@@ -57,7 +57,7 @@ public class HomeController
         baseView.getScene().getWindow().sizeToScene();
     }
 
-    public void viewList(ActionEvent event)
+    public void viewList(ActionEvent ignoredEvent)
         throws IOException
     {
         if (sideView.getChildren().isEmpty())
@@ -72,7 +72,7 @@ public class HomeController
         baseView.getScene().getWindow().sizeToScene();
     }
 
-    public void exit(ActionEvent event)
+    public void exit(ActionEvent ignoredEvent)
         throws IOException
     {
         Main.loadScene("Login");
