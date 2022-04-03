@@ -10,7 +10,7 @@
    <bottom>
       <ToolBar>
         <items>
-          <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#proceedLogin" text="Logout">
+          <Button mnemonicParsing="false" onAction="#exit" text="Exit">
                <tooltip>
                   <Tooltip />
                </tooltip></Button>
@@ -18,25 +18,25 @@
       </ToolBar>
    </bottom>
    <center>
-      <FlowPane alignment="CENTER" hgap="10.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0">
+      <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#testAction" text="Demo">
+            <Button mnemonicParsing="false" onAction="#testAction" text="Demo Alert">
                <tooltip>
                   <Tooltip text="This is a tooltip" />
                </tooltip></Button>
-            <Button mnemonicParsing="false" onAction="#testAction" text="Demo 12">
+            <Button mnemonicParsing="false" onAction="#testAction2" text="Demo Alert 2">
                <tooltip>
                   <Tooltip text="This is a tooltip as well" />
                </tooltip></Button>
-            <Button mnemonicParsing="false" onAction="#testAction" text="Demo 123">
+            <Button mnemonicParsing="false" onAction="#testAction3" text="Demo Alert 3">
                <tooltip>
                   <Tooltip text="tiptool" />
                </tooltip></Button>
-            <Button mnemonicParsing="false" onAction="#testAction" text="Demo 1234">
+            <Button mnemonicParsing="false" onAction="#viewCRUD" text="Show Edit/Add">
                <tooltip>
                   <Tooltip text="t o o l t i p 2" />
                </tooltip></Button>
-            <Button mnemonicParsing="false" onAction="#testAction" text="Demo 7892456125">
+            <Button mnemonicParsing="false" onAction="#viewList" text="Demo List View">
                <tooltip>
                   <Tooltip text="looooooooooooooooooooooooong tooooooooooooooltip" />
                </tooltip></Button>
