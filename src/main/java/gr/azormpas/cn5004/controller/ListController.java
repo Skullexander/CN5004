@@ -1,4 +1,4 @@
 package gr.azormpas.cn5004.controller;
 
-public class ViewController
+public class ListController
 {}
