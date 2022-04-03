@@ -1,20 +1,44 @@
 package gr.azormpas.cn5004.controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class LoginController
 {
-    public TextField fldUsername;
+    @FXML
+    private TextField fldUsername;
+    @FXML
+    private PasswordField fldPassword;
+    @FXML
+    private CheckBox chkCredLogin;
+    @FXML
+    private Button btnLogin;
 
-    public PasswordField fldPassword;
+    @FXML
+    public void initialize()
+    {
+        btnLogin.setText("Click here...");
+    }
 
-    public CheckBox chkCredLogin;
+    public void attemptLogin(ActionEvent event) throws IOException
+    {
+        //Check credentials with user DB
 
-    public Button btnLogin;
+        //If exists, check entry level
 
-    public ChoiceBox choiceEntry;
+        //Open "Home" scene with given entry level
+
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Home.fxml")))));
+        stage.show();
+    }
 }
