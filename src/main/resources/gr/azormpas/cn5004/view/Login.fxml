@@ -15,8 +15,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr.azormpas.cn5004.controller.LoginController">
    <top>
-   
-                <Label alignment="CENTER" text="Verification Portal">
+      <Label alignment="CENTER" text="Verification Portal">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
