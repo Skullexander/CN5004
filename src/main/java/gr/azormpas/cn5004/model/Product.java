@@ -7,23 +7,23 @@ public class Product extends Shop implements Serializable
     private String name;
     private String info;
     private double cost;
-    private boolean isActive;
+    private boolean isAvailable;
 
     public Product(Shop shop, String name, double cost) {
         super(shop);
         this.setName(name);
         this.setInfo(null);
         this.setCost(cost);
-        this.setActive(false);
+        this.setAvailable(false);
         shop.getInventory().add(this);
     }
 
-    public Product(Shop shop, String name, double cost, boolean isActive) {
+    public Product(Shop shop, String name, double cost, boolean isAvailable) {
         super(shop);
         this.setName(name);
         this.setInfo(null);
         this.setCost(cost);
-        this.setActive(isActive);
+        this.setAvailable(isAvailable);
         shop.getInventory().add(this);
     }
 
@@ -51,18 +51,18 @@ public class Product extends Shop implements Serializable
     {
         this.cost = cost;
     }
-    public boolean isActive()
+    public boolean isAvailable()
     {
-        return isActive;
+        return isAvailable;
     }
-    public void setActive(boolean active)
+    public void setAvailable(boolean available)
     {
-        isActive = active;
+        isAvailable = available;
     }
 
     @Override
     public String toString()
     {
-        return String.format("%s: %.2f€", this.getName(), this.getCost());
+        return String.format("%s: %.2f€", this.getShopName(), this.getCost());
     }
 }

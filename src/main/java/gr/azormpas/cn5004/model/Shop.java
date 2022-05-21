@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Shop extends User implements Serializable
 {
-    private String name;
+    private String shopName;
     private String type;
-    private String info;
+    private String details;
     private ArrayList<Product> inventory;
 
     public Shop (Shop shop)
@@ -18,19 +18,19 @@ public class Shop extends User implements Serializable
     public Shop(String username, String password, String name, String type)
     {
         super(username, password);
-        this.setName(name);
+        this.setShopName(name);
         this.setType(type);
-        this.setInfo(null);
+        this.setDetails(null);
         this.setInventory(new ArrayList<>());
     }
 
-    public String getName()
+    public String getShopName()
     {
-        return name;
+        return shopName;
     }
-    public void setName(String name)
+    public void setShopName(String shopName)
     {
-        this.name = name;
+        this.shopName = shopName;
     }
     public String getType()
     {
@@ -40,13 +40,13 @@ public class Shop extends User implements Serializable
     {
         this.type = type;
     }
-    public String getInfo()
+    public String getDetails()
     {
-        return info;
+        return details;
     }
-    public void setInfo(String info)
+    public void setDetails(String details)
     {
-        this.info = info;
+        this.details = details;
     }
     public ArrayList<Product> getInventory()
     {
@@ -60,6 +60,6 @@ public class Shop extends User implements Serializable
     @Override
     public String toString ()
     {
-        return String.format("%s (%s)", getName(), getType());
+        return String.format("%s (%s)", getShopName(), getType());
     }
 }
