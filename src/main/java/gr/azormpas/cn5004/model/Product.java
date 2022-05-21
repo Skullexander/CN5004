@@ -63,6 +63,6 @@ public class Product extends Shop implements Serializable
     @Override
     public String toString()
     {
-        return String.format("%s: %.2f€", this.getShopName(), this.getCost());
+        return String.format("%s: %.2f€", this.getName(), this.getCost());
     }
 }
