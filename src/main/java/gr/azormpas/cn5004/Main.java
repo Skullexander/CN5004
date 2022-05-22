@@ -1,5 +1,6 @@
 package gr.azormpas.cn5004;
 
+import gr.azormpas.cn5004.controller.DataController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,13 +15,13 @@ public class Main
     extends Application
 {
     public static Stage stage;
+    public static DataController data = new DataController();
 
     @Override
     public void start(Stage primaryStage)
         throws IOException
     {
         stage = primaryStage;
-
         stage.setTitle("CN5004");
         loadScene("Login");
         stage.show();
