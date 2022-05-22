@@ -1,8 +1,8 @@
 package gr.azormpas.cn5004.model;
 
-import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class User
+public class User implements Serializable
 {
     private String username;
     private String password;
@@ -21,7 +21,7 @@ public class User
     {
         this.setUsername(username);
         this.setPassword(password);
-        this.setLastLogin(DateTimeFormatter.ISO_LOCAL_TIME.toString());
+        this.setLastLogin(String.valueOf(new java.util.Date()));
         this.setActive(false);
     }
 
