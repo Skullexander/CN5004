@@ -61,6 +61,6 @@ public class User implements Serializable
     @Override
     public String toString()
     {
-        return null;
+        return String.format("%s %s %s %s", getUsername(), getPassword(), getLastLogin(), isActive);
     }
 }
