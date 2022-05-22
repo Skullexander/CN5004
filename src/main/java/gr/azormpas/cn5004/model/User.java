@@ -9,6 +9,14 @@ public class User
     private String lastLogin;
     private boolean isActive;
 
+    public User()
+    {
+        this.setUsername(null);
+        this.setPassword(null);
+        this.setLastLogin(null);
+        this.setActive(true);
+    }
+
     public User(String username, String password)
     {
         this.setUsername(username);
