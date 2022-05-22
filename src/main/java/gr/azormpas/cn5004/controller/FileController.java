@@ -9,17 +9,51 @@ import java.io.ObjectOutputStream;
 
 public class FileController
 {
-    private FileInputStream fileInputStream;
-    private FileOutputStream fileOutputStream;
+    private final File file;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
 
-    public FileController (File file)
+    public FileController(File file, String name)
         throws IOException
     {
-        fileInputStream = new FileInputStream(file);
-        fileOutputStream = new FileOutputStream(file);
-        objectInputStream = new ObjectInputStream(fileInputStream);
-        objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        this.file = new File(file, name);
+    }
+
+    public void save(Object object)
+        throws IOException
+    {
+        objectOutputStream = new ObjectOutputStream(new FileOutputStream(this.file));
+        objectOutputStream.writeObject(object);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+    }
+
+    public Object load()
+        throws IOException, ClassNotFoundException
+    {
+        objectInputStream = new ObjectInputStream(new FileInputStream(this.file));
+        return objectInputStream.readObject();
+    }
+
+    public void loadClose()
+        throws IOException
+    {
+        objectInputStream.close();
+    }
+
+    public boolean create()
+        throws IOException
+    {
+        return this.file.createNewFile();
+    }
+
+    public boolean exists()
+    {
+        return this.file.exists();
+    }
+
+    public boolean isEmpty()
+    {
+        return (this.file.getTotalSpace() == 0);
     }
 }
