@@ -12,6 +12,17 @@ public class Purchase extends Customer implements Serializable
     private double cost;
     private int state;
 
+    public Purchase (Customer customer, int amount, Product product, double cost)
+    {
+        super(customer);
+        this.setDate(DateTimeFormatter.ISO_LOCAL_TIME.toString());
+        this.setItems(new HashMap<>());
+        this.getItems().put(amount, product);
+        this.setCost(cost);
+        this.setState(0);
+        customer.getPurchases().add(this);
+    }
+
     public Purchase (Customer customer, HashMap<Integer, Product> items, double cost)
     {
         super(customer);
