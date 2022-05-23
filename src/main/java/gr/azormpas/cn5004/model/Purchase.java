@@ -1,7 +1,6 @@
 package gr.azormpas.cn5004.model;
 
 import java.io.Serializable;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class Purchase extends Customer implements Serializable
@@ -15,7 +14,7 @@ public class Purchase extends Customer implements Serializable
     public Purchase (Customer customer, int amount, Product product, double cost)
     {
         super(customer);
-        this.setDate(DateTimeFormatter.ISO_LOCAL_TIME.toString());
+        this.setDate(String.valueOf(new java.util.Date()));
         this.setItems(new HashMap<>());
         this.getItems().put(amount, product);
         this.setCost(cost);
@@ -26,7 +25,7 @@ public class Purchase extends Customer implements Serializable
     public Purchase (Customer customer, HashMap<Integer, Product> items, double cost)
     {
         super(customer);
-        this.setDate(DateTimeFormatter.ISO_LOCAL_TIME.toString());
+        this.setDate(String.valueOf(new java.util.Date()));
         this.setItems(items);
         this.setCost(cost);
         this.setState(0);
