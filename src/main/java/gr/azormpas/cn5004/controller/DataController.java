@@ -189,4 +189,14 @@ public class DataController
             customers.get(2).getPurchases().add(new Purchase(customers.get(2), 5047, shops.get(2).getInventory().get(1), 127.1057542));
         }
     }
+
+    public ArrayList<Shop> getShops()
+    {
+        return shops;
+    }
+
+    public ArrayList<Customer> getCustomers()
+    {
+        return customers;
+    }
 }
