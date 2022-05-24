@@ -32,7 +32,7 @@ public class DataController
             file.put("customer", new FileController(DATA_FOLDER, "customerData.txt"));
             file.put("shop", new FileController(DATA_FOLDER, "shopData.txt"));
             loadData(DATA_FOLDER.mkdir());
-            saveAll();
+            saveData();
         }
         catch (IOException | ClassNotFoundException e)
         {
@@ -143,7 +143,7 @@ public class DataController
         }
     }
 
-    public void saveAll()
+    public void saveData()
         throws IOException
     {
         saveSettings();
