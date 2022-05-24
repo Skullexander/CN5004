@@ -3,6 +3,7 @@ package gr.azormpas.cn5004.controller;
 import gr.azormpas.cn5004.model.Customer;
 import gr.azormpas.cn5004.model.Product;
 import gr.azormpas.cn5004.model.Purchase;
+import gr.azormpas.cn5004.model.Settings;
 import gr.azormpas.cn5004.model.Shop;
 import gr.azormpas.cn5004.model.User;
 
@@ -21,14 +22,17 @@ public class DataController
 
     private final File DATA_FOLDER = new File("../data");
     private final HashMap<String, FileController> file = new HashMap<>();
+    private Settings settings;
 
     public DataController()
     {
         try
         {
+            file.put("settings", new FileController(DATA_FOLDER, "settings.txt"));
             file.put("customer", new FileController(DATA_FOLDER, "customerData.txt"));
             file.put("shop", new FileController(DATA_FOLDER, "shopData.txt"));
-            init();
+            loadSettings(DATA_FOLDER.mkdir());
+            saveAll();
         }
         catch (IOException | ClassNotFoundException e)
         {
@@ -36,14 +40,7 @@ public class DataController
         }
     }
 
-    public void init()
-        throws IOException, ClassNotFoundException
-    {
-        loadAll(DATA_FOLDER.mkdir());
-        saveAll();
-    }
-
-    public void loadAll(boolean exists)
+    public void loadData(boolean exists)
         throws IOException, ClassNotFoundException
     {
         if (exists) System.out.println("Data folder initialized.");
@@ -52,15 +49,33 @@ public class DataController
         loadUsers();
     }
 
+    private void loadSettings(boolean exists)
+        throws IOException, ClassNotFoundException
+    {
+        if (exists)
+        {
+            settings = new Settings();
+        }
+        else
+        {
+            try
+            {
+                objectLoad("settings");
+            }
+            catch (EOFException ignored)
+            {
+                System.out.println("Could not find Settings data in file. Loading defaults...");
+                settings = new Settings();
+            }
+        }
+        loadData(exists);
+    }
+
     public void loadShops(boolean exists)
         throws IOException, ClassNotFoundException
     {
         shops.clear();
-        if (exists)
-        {
-            addDefaultData("shop");
-        }
-        else
+        if (!exists)
         {
             try
             {
@@ -73,8 +88,8 @@ public class DataController
             catch (EOFException ignored)
             {
                 System.out.println("Could not find Shop data in file. Loading defaults...");
-                addDefaultData("shop");
             }
+            if (settings.isUseDefaultData()) addDefaultData("shop");
         }
     }
 
@@ -82,11 +97,7 @@ public class DataController
         throws IOException, ClassNotFoundException
     {
         customers.clear();
-        if (exists)
-        {
-            addDefaultData("customer");
-        }
-        else
+        if (!exists)
         {
             try
             {
@@ -99,8 +110,8 @@ public class DataController
             catch (EOFException ignored)
             {
                 System.out.println("Could not find Customer data in file. Loading defaults...");
-                addDefaultData("customers");
             }
+            if (settings.isUseDefaultData()) addDefaultData("customer");
         }
     }
 
@@ -108,6 +119,7 @@ public class DataController
         throws IOException, ClassNotFoundException
     {
         if (type.equals("customer")) customers.addAll((ArrayList<Customer>) file.get(type).load());
+        else if (type.equals("settings")) settings = (Settings) file.get(type).load();
         else shops.addAll((ArrayList<Shop>) file.get(type).load());
         file.get(type).loadClose();
     }
@@ -115,33 +127,46 @@ public class DataController
     public void loadUsers()
     {
         users.clear();
-        for (Shop shop : shops)
+        if (shops.size() != 0)
         {
-            users.put(shop.getUsername(), shop.getPassword());
+            for (Shop shop : shops)
+            {
+                users.put(shop.getUsername(), shop.getPassword());
+            }
         }
-        for (Customer customer : customers)
+        if (customers.size() != 0)
         {
-            users.put(customer.getUsername(), customer.getPassword());
+            for (Customer customer : customers)
+            {
+                users.put(customer.getUsername(), customer.getPassword());
+            }
         }
     }
 
     public void saveAll()
         throws IOException
     {
+        saveSettings();
         saveShops();
         saveCustomers();
+    }
+
+    public void saveSettings()
+        throws IOException
+    {
+        file.get("settings").save(settings);
     }
 
     public void saveShops()
         throws IOException
     {
-        file.get("shop").save(shops);
+        if (shops.size() != 0) file.get("shop").save(shops);
     }
 
     public void saveCustomers()
         throws IOException
     {
-        file.get("customer").save(customers);
+        if (customers.size() != 0) file.get("customer").save(customers);
     }
 
     public boolean hasUser(String value)
@@ -198,5 +223,10 @@ public class DataController
     public ArrayList<Customer> getCustomers()
     {
         return customers;
+    }
+
+    public Settings getSettings()
+    {
+        return settings;
     }
 }
