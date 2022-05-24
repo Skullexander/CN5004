@@ -31,7 +31,7 @@ public class DataController
             file.put("settings", new FileController(DATA_FOLDER, "settings.txt"));
             file.put("customer", new FileController(DATA_FOLDER, "customerData.txt"));
             file.put("shop", new FileController(DATA_FOLDER, "shopData.txt"));
-            loadSettings(DATA_FOLDER.mkdir());
+            loadData(DATA_FOLDER.mkdir());
             saveAll();
         }
         catch (IOException | ClassNotFoundException e)
@@ -44,6 +44,7 @@ public class DataController
         throws IOException, ClassNotFoundException
     {
         if (exists) System.out.println("Data folder initialized.");
+        loadSettings(file.get("settings").create());
         loadShops(file.get("shop").create());
         loadCustomers(file.get("customer").create());
         loadUsers();
@@ -68,7 +69,6 @@ public class DataController
                 settings = new Settings();
             }
         }
-        loadData(exists);
     }
 
     public void loadShops(boolean exists)
