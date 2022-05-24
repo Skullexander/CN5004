@@ -10,20 +10,21 @@ import java.io.ObjectOutputStream;
 public class FileController
 {
     private final File file;
-    private final ObjectInputStream objectInputStream;
-    private final ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
+    private ObjectOutputStream objectOutputStream;
 
     public FileController(File file, String name)
         throws IOException
     {
         this.file = new File(file, name);
-        objectOutputStream = new ObjectOutputStream(new FileOutputStream(this.file));
-        objectInputStream = new ObjectInputStream(new FileInputStream(this.file));
+
+
     }
 
     public void save(Object object)
         throws IOException
     {
+        objectOutputStream = new ObjectOutputStream(new FileOutputStream(this.file));
         objectOutputStream.writeObject(object);
         objectOutputStream.flush();
         objectOutputStream.close();
@@ -32,6 +33,7 @@ public class FileController
     public Object load()
         throws IOException, ClassNotFoundException
     {
+        objectInputStream = new ObjectInputStream(new FileInputStream(this.file));
         return objectInputStream.readObject();
     }
 
