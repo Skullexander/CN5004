@@ -28,7 +28,24 @@ public class HomeController
     private String type;
     private Alert alert;
 
-    AnchorPane sideView = new AnchorPane();
+    public void initialize()
+    {
+        txtName.setText(Main.data.getSettings().getLoadedUser().getUsername().toUpperCase());
+        checkType(Main.data.getUserType(Main.data.getSettings().getLoadedUser().getUsername()));
+        if (type.equals("shop"))
+        {
+            btnUserList.setVisible(false);
+            btnShopList.setVisible(false);
+            btnCustomerList.setVisible(false);
+        }
+        else if (type.equals("customer"))
+        {
+            btnUserList.setVisible(false);
+            btnCustomerList.setVisible(false);
+            btnProductList.setVisible(false);
+        }
+        boxOptions.getChildren().removeIf(node -> !node.isVisible());
+    }
 
     public void viewCRUD(ActionEvent ignoredEvent)
         throws IOException
