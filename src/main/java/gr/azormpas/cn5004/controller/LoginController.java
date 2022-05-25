@@ -44,7 +44,7 @@ public class LoginController
         }
     }
 
-    public void toggleDefaultData (ActionEvent actionEvent)
+    public void toggleDefaultData (ActionEvent ignoredEvent)
         throws IOException
     {
         Main.data.getSettings().setUseDefaultData(chkDefaultData.isSelected());
@@ -58,7 +58,8 @@ public class LoginController
         Main.data.saveSettings();
     }
 
-    public void attemptLogin(ActionEvent event) throws IOException
+    public void attemptLogin(ActionEvent ignoredEvent)
+        throws IOException
     {
         if (Main.data.verifyUser(fldUsername.getText(), fldPassword.getText()))
         {
