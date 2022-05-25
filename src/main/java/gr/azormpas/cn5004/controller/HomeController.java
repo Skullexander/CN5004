@@ -47,12 +47,32 @@ public class HomeController
         boxOptions.getChildren().removeIf(node -> !node.isVisible());
     }
 
-    public void viewCRUD(ActionEvent ignoredEvent)
-        throws IOException
+    private void checkType(int @NotNull [] location)
     {
-        if (!sideView.getChildren().isEmpty()) clearSideView();
-        createSideView("Edit");
-        baseView.getScene().getWindow().sizeToScene();
+        switch(location[0])
+        {
+            case(0):
+                type = "admin";
+                break;
+            case(1):
+                type = "shop";
+                break;
+            case(2):
+                type = "customer";
+                break;
+            default:
+                try
+                {
+                    alert = new Alert(Alert.AlertType.ERROR, "User does not exist. Returning to Verification Portal.");
+                    alert.show();
+                    exit(new ActionEvent());
+                }
+                catch (IOException e)
+                {
+                    throw new RuntimeException(e);
+                }
+                break;
+        }
     }
 
     public void viewList(ActionEvent ignoredEvent)
