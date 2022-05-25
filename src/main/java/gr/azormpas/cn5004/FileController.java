@@ -1,4 +1,4 @@
-package gr.azormpas.cn5004.controller;
+package gr.azormpas.cn5004;
 
 import java.io.File;
 import java.io.FileInputStream;
