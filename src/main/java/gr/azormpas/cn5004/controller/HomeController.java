@@ -4,8 +4,13 @@ import gr.azormpas.cn5004.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -13,6 +18,15 @@ public class HomeController
 {
     @FXML
     private BorderPane baseView;
+    @FXML
+    private VBox boxOptions;
+    @FXML
+    private Label txtName;
+    @FXML
+    private Button btnProfile, btnUserList, btnShopList, btnCustomerList, btnProductList, btnPurchaseList;
+    private final AnchorPane sideView = new AnchorPane();
+    private String type;
+    private Alert alert;
 
     AnchorPane sideView = new AnchorPane();
 
