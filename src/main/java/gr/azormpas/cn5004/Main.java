@@ -1,6 +1,5 @@
 package gr.azormpas.cn5004;
 
-import gr.azormpas.cn5004.controller.DataController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
