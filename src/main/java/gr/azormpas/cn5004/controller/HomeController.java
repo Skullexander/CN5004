@@ -38,21 +38,29 @@ public class HomeController
         Main.loadScene("Login");
     }
 
+
     private void createSideView(String view)
         throws IOException
     {
-        sideView.getChildren().add(setSideView(view));
+        if (!sideView.getChildren().isEmpty()) clearSideView();
+        sideView.getChildren().add(setSideView(String.format("%s/%s",type ,view)));
         baseView.rightProperty().set(sideView);
+        resizeView();
     }
 
-    private Node setSideView (String view)
+    private Node setSideView(String view)
         throws IOException
     {
         return Main.loadFXML(view);
     }
 
-    private void clearSideView ()
+    private void clearSideView()
     {
         sideView.getChildren().clear();
+    }
+
+    private void resizeView()
+    {
+        baseView.getScene().getWindow().sizeToScene();
     }
 }
