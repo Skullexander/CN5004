@@ -75,12 +75,45 @@ public class HomeController
         }
     }
 
-    public void viewList(ActionEvent ignoredEvent)
+    public void viewProfile(ActionEvent ignoredEvent)
         throws IOException
     {
-        if (!sideView.getChildren().isEmpty()) clearSideView();
-        createSideView("List");
-        baseView.getScene().getWindow().sizeToScene();
+        Main.loadScene(setTypeView("Profile"));
+    }
+
+    public void viewUserList(ActionEvent ignoredEvent)
+        throws IOException
+    {
+        Main.loadScene(setTypeView("UserList"));
+    }
+
+    public void viewShopList(ActionEvent ignoredEvent)
+        throws IOException
+    {
+        Main.loadScene(setTypeView("ShopList"));
+    }
+
+    public void viewCustomerList(ActionEvent ignoredEvent)
+        throws IOException
+    {
+        Main.loadScene(setTypeView("CustomerList"));
+    }
+
+    public void viewProductList(ActionEvent ignoredEvent)
+        throws IOException
+    {
+        Main.loadScene(setTypeView("ProductList"));
+    }
+
+    public void viewPurchaseList(ActionEvent ignoredEvent)
+        throws IOException
+    {
+        Main.loadScene(setTypeView("PurchaseList"));
+    }
+
+    private String setTypeView(String view)
+    {
+        return String.format("%s/%s",type ,view);
     }
 
     public void exit(ActionEvent ignoredEvent)
