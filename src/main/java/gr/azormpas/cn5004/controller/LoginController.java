@@ -73,7 +73,6 @@ public class LoginController
     }
 
     private void rememberUser()
-        throws IOException
     {
         Main.data.getSettings().getLoadedUser().setUsername(fldUsername.getText());
         Main.data.getSettings().getLoadedUser().setPassword(fldPassword.getText());
