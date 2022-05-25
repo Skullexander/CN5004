@@ -170,6 +170,34 @@ public class DataController
         if (customers.size() != 0) file.get("customer").save(customers);
     }
 
+    public int getUserLocation(String username)
+    {
+        if (ADMIN_USER.getUsername().equals(username)) return -1;
+        for (Shop shop : shops)
+        {
+            if (shop.getUsername().equals(username)) return shops.indexOf(shop);
+        }
+        for (Customer customer : customers)
+        {
+            if (customer.getUsername().equals(username)) return customers.indexOf(customer);
+        }
+        return -2;
+    }
+
+    public int[] getUserType(String username)
+    {
+        if (ADMIN_USER.getUsername().equals(username)) return new int[]{0, 0};
+        for (Shop shop : shops)
+        {
+            if (shop.getUsername().equals(username)) return new int[]{1, shops.indexOf(shop)};
+        }
+        for (Customer customer : customers)
+        {
+            if (customer.getUsername().equals(username)) return new int[]{2, customers.indexOf(customer)};
+        }
+        return new int[]{-1, -1};
+    }
+
     public boolean hasUser(String value)
     {
         return users.containsKey(value);
