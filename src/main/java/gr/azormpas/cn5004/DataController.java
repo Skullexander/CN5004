@@ -6,6 +6,7 @@ import gr.azormpas.cn5004.model.Purchase;
 import gr.azormpas.cn5004.model.Settings;
 import gr.azormpas.cn5004.model.Shop;
 import gr.azormpas.cn5004.model.User;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.EOFException;
 import java.io.File;
@@ -115,7 +116,7 @@ public class DataController
         }
     }
 
-    private void objectLoad(String type)
+    private void objectLoad(@NotNull String type)
         throws IOException, ClassNotFoundException
     {
         if (type.equals("customer")) customers.addAll((ArrayList<Customer>) file.get(type).load());
@@ -185,7 +186,7 @@ public class DataController
         return (ADMIN_USER.getUsername().equals(username) && ADMIN_USER.getPassword().equals(password));
     }
 
-    public void addDefaultData(String target)
+    public void addDefaultData(@NotNull String target)
     {
         if (target.equals("shop"))
         {
