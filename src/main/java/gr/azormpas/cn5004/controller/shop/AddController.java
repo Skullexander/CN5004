@@ -28,7 +28,7 @@ public class AddController
         {
             new Alert(AlertType.ERROR, "Product name is empty or blank.").show();
         }
-        else if (fldCost.getText().isBlank() && fldCost.getText().matches("^\\d*\\.\\d{2}$"))
+        else if (fldCost.getText().isBlank() && fldCost.getText().matches("^\\d{1,8}\\.\\d{2}$"))
         {
             new Alert(AlertType.ERROR, "Product cost invalid. Mandatory use of exactly two decimals (example: 12.00)").show();
         }
