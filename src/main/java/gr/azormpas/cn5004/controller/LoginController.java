@@ -24,23 +24,24 @@ public class LoginController
     @FXML
     public void initialize()
     {
-        if(Main.data.getSettings().isRememberUser())
+        try
         {
-            try
+            Main.data.loadData();
+            if(Main.data.getSettings().isRememberUser())
             {
                 chkRemember.setSelected(true);
                 fldUsername.setText(Main.data.getSettings().getLoadedUser().getUsername());
                 Main.data.getSettings().getLoadedUser().setPassword(null);
                 Main.data.saveSettings();
             }
-            catch (IOException e)
+            if (Main.data.getSettings().isUseDefaultData())
             {
-                throw new RuntimeException(e);
+                chkDefaultData.setSelected(true);
             }
         }
-        if (Main.data.getSettings().isUseDefaultData())
+        catch (IOException | ClassNotFoundException e)
         {
-            chkDefaultData.setSelected(true);
+            throw new RuntimeException(e);
         }
     }
 
