@@ -40,10 +40,10 @@ public class DataController
         }
     }
 
-    public void loadData(boolean exists)
+    public void loadData()
         throws IOException, ClassNotFoundException
     {
-        if (exists) System.out.println("Data folder initialized.");
+        if (DATA_FOLDER.mkdir()) System.out.println("Data folder initialized.");
         loadSettings(file.get("settings").create());
         loadShops(file.get("shop").create());
         loadCustomers(file.get("customer").create());
