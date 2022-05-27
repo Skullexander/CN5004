@@ -23,6 +23,7 @@ public class DataController
 
     private final File DATA_FOLDER = new File("../data");
     private final HashMap<String, FileController> file = new HashMap<>();
+    private int[] userDetails;
     private Settings settings;
 
     public DataController()
@@ -81,10 +82,6 @@ public class DataController
             try
             {
                 objectLoad("shop");
-                System.out.println(shops.size());
-                System.out.println(shops.get(0).getInventory().size());
-                System.out.println(shops.get(1).getInventory().size());
-                System.out.println(shops.get(2).getInventory().size());
             }
             catch (EOFException ignored)
             {
@@ -103,10 +100,6 @@ public class DataController
             try
             {
                 objectLoad("customer");
-                System.out.println(customers.size());
-                System.out.println(customers.get(0).getPurchases().size());
-                System.out.println(customers.get(1).getPurchases().size());
-                System.out.println(customers.get(2).getPurchases().size());
             }
             catch (EOFException ignored)
             {
@@ -170,32 +163,37 @@ public class DataController
         if (customers.size() != 0) file.get("customer").save(customers);
     }
 
-    public int getUserLocation(String username)
+    public void getUserLocation(String username)
     {
-        if (ADMIN_USER.getUsername().equals(username)) return -1;
+        userDetails = new int[]{-1, -1};
+        if (ADMIN_USER.getUsername().equals(username))
+        {
+            userDetails = new int[]{0, 0};
+        }
         for (Shop shop : shops)
         {
-            if (shop.getUsername().equals(username)) return shops.indexOf(shop);
+            if (shop.getUsername().equals(username))
+            {
+                userDetails = new int[]{1, shops.indexOf(shop)};
+            }
         }
         for (Customer customer : customers)
         {
-            if (customer.getUsername().equals(username)) return customers.indexOf(customer);
+            if (customer.getUsername().equals(username))
+            {
+                userDetails = new int[]{2, customers.indexOf(customer)};
+            }
         }
-        return -2;
     }
 
-    public int[] getUserType(String username)
+    public int getLoggedUserType()
     {
-        if (ADMIN_USER.getUsername().equals(username)) return new int[]{0, 0};
-        for (Shop shop : shops)
-        {
-            if (shop.getUsername().equals(username)) return new int[]{1, shops.indexOf(shop)};
-        }
-        for (Customer customer : customers)
-        {
-            if (customer.getUsername().equals(username)) return new int[]{2, customers.indexOf(customer)};
-        }
-        return new int[]{-1, -1};
+        return userDetails[0];
+    }
+
+    public int getLoggedUserLocation()
+    {
+        return userDetails[1];
     }
 
     public boolean hasUser(String value)
