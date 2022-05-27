@@ -33,10 +33,8 @@ public class DataController
             file.put("settings", new FileController(DATA_FOLDER, "settings.txt"));
             file.put("customer", new FileController(DATA_FOLDER, "customerData.txt"));
             file.put("shop", new FileController(DATA_FOLDER, "shopData.txt"));
-            loadData(DATA_FOLDER.mkdir());
-            saveData();
         }
-        catch (IOException | ClassNotFoundException e)
+        catch (IOException e)
         {
             e.printStackTrace();
         }
