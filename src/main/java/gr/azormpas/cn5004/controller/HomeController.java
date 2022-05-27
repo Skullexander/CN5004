@@ -31,7 +31,7 @@ public class HomeController
     public void initialize()
     {
         txtName.setText(Main.data.getSettings().getLoadedUser().getUsername().toUpperCase());
-        checkType(Main.data.getUserType(Main.data.getSettings().getLoadedUser().getUsername()));
+        checkType();
         if (type.equals("shop"))
         {
             btnUserList.setVisible(false);
@@ -47,9 +47,9 @@ public class HomeController
         boxOptions.getChildren().removeIf(node -> !node.isVisible());
     }
 
-    private void checkType(int @NotNull [] location)
+    private void checkType()
     {
-        switch(location[0])
+        switch(Main.data.getLoggedUserType())
         {
             case(0):
                 type = "admin";

@@ -78,5 +78,6 @@ public class LoginController
         Main.data.getSettings().getLoadedUser().setUsername(fldUsername.getText());
         Main.data.getSettings().getLoadedUser().setPassword(fldPassword.getText());
         Main.data.getSettings().getLoadedUser().setLastLogin(String.valueOf(new java.util.Date()));
+        Main.data.getUserLocation(fldUsername.getText());
     }
 }

@@ -35,18 +35,20 @@ public class AddController
         else
         {
             Main.data.getShops()
-                     .get(Main.data.getUserLocation(Main.data.getSettings().getLoadedUser().getUsername()))
+                     .get(Main.data.getLoggedUserLocation())
                      .getInventory()
                      .add(new Product(
-                         Main.data.getShops().get(Main.data.getUserLocation(Main.data.getSettings().getLoadedUser().getUsername())),
+                         Main.data.getShops().get(Main.data.getLoggedUserLocation()),
                          fldName.getText(),
                          Double.parseDouble(fldCost.getText()),
                          chkIsAvailable.isSelected()));
 
             Main.data.getShops()
-                     .get(Main.data.getUserLocation(Main.data.getSettings().getLoadedUser().getUsername()))
+                     .get(Main.data.getLoggedUserLocation())
                      .getInventory()
-                     .get(Main.data.getShops().get(Main.data.getUserLocation(Main.data.getSettings().getLoadedUser().getUsername())).getInventory().size()-1)
+                     .get(Main.data.getShops()
+                                   .get(Main.data.getLoggedUserLocation())
+                                   .getInventory().size()-1)
                      .setInfo(fldInfo.getText());
         }
     }
