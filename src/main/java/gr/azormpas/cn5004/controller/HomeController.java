@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -102,7 +101,7 @@ public class HomeController
     public void viewProductList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("ProductList"));
+        Main.loadScene(setTypeView("List"));
     }
 
     public void viewPurchaseList(ActionEvent ignoredEvent)
