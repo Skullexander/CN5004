@@ -46,7 +46,14 @@ public class DataController
     public void loadData()
         throws IOException, ClassNotFoundException
     {
-        if (DATA_FOLDER.mkdir()) System.out.println("Data folder initialized.");
+        if (DATA_FOLDER.mkdir())
+        {
+            System.out.println("Data folder not found. Creating new folder...");
+        }
+        else
+        {
+            System.out.println("Data folder found!");
+        }
         loadSettings(file.get("settings").create());
         loadShops(file.get("shop").create());
         loadCustomers(file.get("customer").create());
@@ -56,19 +63,22 @@ public class DataController
     private void loadSettings(boolean exists)
         throws IOException, ClassNotFoundException
     {
+        System.out.println("Loading Settings...");
         if (exists)
         {
             settings = new Settings();
+            System.out.println("Could not find Settings data file. Creating new...");
         }
         else
         {
             try
             {
                 objectLoad("settings");
+                System.out.println("Settings loaded from file!");
             }
             catch (EOFException ignored)
             {
-                System.out.println("Could not find Settings data in file. Loading defaults...");
+                System.out.println("Could not find Settings data in file location. Loading default values.");
                 settings = new Settings();
             }
         }
@@ -78,15 +88,20 @@ public class DataController
         throws IOException, ClassNotFoundException
     {
         shops.clear();
-        if (!exists)
+        if (exists)
+        {
+            System.out.println("Could not find Shops data file. Creating new...");
+        }
+        else
         {
             try
             {
                 objectLoad("shop");
+                System.out.println("Shops loaded from file!");
             }
             catch (EOFException ignored)
             {
-                System.out.println("Could not find Shop data in file. Loading defaults...");
+                System.out.println("Could not find Shop data in file location. Login as ADMIN or use defaults.");
             }
         }
     }
@@ -95,15 +110,20 @@ public class DataController
         throws IOException, ClassNotFoundException
     {
         customers.clear();
-        if (!exists)
+        if (exists)
+        {
+            System.out.println("Could not find Customers data file. Creating new...");
+        }
+        else
         {
             try
             {
                 objectLoad("customer");
+                System.out.println("Customers loaded from file!");
             }
             catch (EOFException ignored)
             {
-                System.out.println("Could not find Customer data in file. Loading defaults...");
+                System.out.println("Could not find Customer data in file. Login as ADMIN or use defaults.");
             }
         }
     }
@@ -111,28 +131,54 @@ public class DataController
     private void objectLoad(@NotNull String type)
         throws IOException, ClassNotFoundException
     {
-        if (type.equals("customer")) customers.addAll((ArrayList<Customer>) file.get(type).load());
-        else if (type.equals("settings")) settings = (Settings) file.get(type).load();
-        else shops.addAll((ArrayList<Shop>) file.get(type).load());
+        if (type.equals("customer"))
+        {
+            customers.addAll((ArrayList<Customer>) file.get(type).load());
+        }
+        else if (type.equals("settings"))
+        {
+            settings = (Settings) file.get(type).load();
+        }
+        else
+        {
+            shops.addAll((ArrayList<Shop>) file.get(type).load());
+        }
         file.get(type).loadClose();
     }
 
     public void loadUsers()
     {
-        users.clear();
+        if (!users.isEmpty())
+        {
+            users.clear();
+            System.out.println("Cleared old User credentials!");
+        }
+        System.out.println("Fetching Shop User credentials...");
         if (shops.size() != 0)
         {
             for (Shop shop : shops)
             {
                 users.put(shop.getUsername(), shop.getPassword());
+
             }
+            System.out.println("Shop User credentials fetched!");
         }
+        else
+        {
+            System.out.println("No Shop Users found.");
+        }
+        System.out.println("Fetching Customer User credentials...");
         if (customers.size() != 0)
         {
             for (Customer customer : customers)
             {
                 users.put(customer.getUsername(), customer.getPassword());
             }
+            System.out.println("Customer User credentials fetched!");
+        }
+        else
+        {
+            System.out.println("No Customer Users found.");
         }
     }
 
@@ -202,8 +248,14 @@ public class DataController
 
     public boolean verifyUser(String username, String password)
     {
-        if (hasUser(username)) return users.get(username).equals(password);
-        else return checkIfAdmin(username, password);
+        if (hasUser(username))
+        {
+            return users.get(username).equals(password);
+        }
+        else
+        {
+            return checkIfAdmin(username, password);
+        }
     }
 
     private boolean checkIfAdmin(String username, String password)
