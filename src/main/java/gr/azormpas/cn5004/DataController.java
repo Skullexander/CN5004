@@ -194,7 +194,7 @@ public class DataController
         return userDetails[1];
     }
 
-    public boolean hasUser(String value)
+    private boolean hasUser(String value)
     {
         return users.containsKey(value);
     }
