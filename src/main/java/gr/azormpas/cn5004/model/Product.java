@@ -15,7 +15,6 @@ public class Product extends Shop implements Serializable
         this.setInfo(null);
         this.setCost(cost);
         this.setAvailable(false);
-        shop.getInventory().add(this);
     }
 
     public Product(Shop shop, String name, double cost, boolean isAvailable) {
@@ -24,7 +23,6 @@ public class Product extends Shop implements Serializable
         this.setInfo(null);
         this.setCost(cost);
         this.setAvailable(isAvailable);
-        shop.getInventory().add(this);
     }
 
     public String getName()

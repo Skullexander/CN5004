@@ -19,7 +19,6 @@ public class Purchase extends Customer implements Serializable
         this.getItems().put(amount, product);
         this.setCost(cost);
         this.setState(0);
-        customer.getPurchases().add(this);
     }
 
     public Purchase (Customer customer, HashMap<Integer, Product> items, double cost)
@@ -29,7 +28,6 @@ public class Purchase extends Customer implements Serializable
         this.setItems(items);
         this.setCost(cost);
         this.setState(0);
-        customer.getPurchases().add(this);
     }
 
     public int getID()
