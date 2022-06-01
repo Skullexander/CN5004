@@ -1,4 +1,4 @@
-package gr.azormpas.cn5004.controller.shop;
+package gr.azormpas.cn5004.controller.product;
 
 import gr.azormpas.cn5004.Main;
 import gr.azormpas.cn5004.model.Product;
