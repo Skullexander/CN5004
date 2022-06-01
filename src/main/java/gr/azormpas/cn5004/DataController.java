@@ -12,11 +12,14 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class DataController
 {
     private final User ADMIN_USER = new User("admin", "admin");
+    private final ArrayList<Shop> DEFAULT_SHOPS = populateShops();
+    private final ArrayList<Customer> DEFAULT_CUSTOMERS = populateCustomers();
     private final ArrayList<Shop> shops = new ArrayList<>();
     private final ArrayList<Customer> customers = new ArrayList<>();
     private final HashMap<String, String> users = new HashMap<>();
@@ -85,7 +88,6 @@ public class DataController
             {
                 System.out.println("Could not find Shop data in file. Loading defaults...");
             }
-            if (settings.isUseDefaultData()) addDefaultData("shop");
         }
     }
 
@@ -103,7 +105,6 @@ public class DataController
             {
                 System.out.println("Could not find Customer data in file. Loading defaults...");
             }
-            if (settings.isUseDefaultData()) addDefaultData("customer");
         }
     }
 
@@ -210,34 +211,83 @@ public class DataController
         return (ADMIN_USER.getUsername().equals(username) && ADMIN_USER.getPassword().equals(password));
     }
 
-    public void addDefaultData(@NotNull String target)
+    private ArrayList<Shop> populateShops()
     {
-        if (target.equals("shop"))
-        {
-            shops.add(new Shop("test1", "test1", "Shop1", "retail"));
-            shops.add(new Shop("test3", "test3", "Shop2", "producer"));
-            shops.add(new Shop("test5", "test5", "Shop3", "mixed"));
+        ArrayList<Shop> arrayList = new ArrayList<>(3);
 
-            shops.get(0).getInventory().add(new Product(shops.get(0), "abc", 2.5, true));
-            shops.get(0).getInventory().add(new Product(shops.get(0), "def", 12.45672));
-            shops.get(1).getInventory().add(new Product(shops.get(1), "ghi", 0.54, true));
-            shops.get(1).getInventory().add(new Product(shops.get(1), "jkl", 4.57, true));
-            shops.get(2).getInventory().add(new Product(shops.get(2), "mno", 1));
-            shops.get(2).getInventory().add(new Product(shops.get(2), "pqr", 27.645, true));
-        }
-        else
-        {
-            customers.add(new Customer("test2", "test2", "George"));
-            customers.add(new Customer("test4", "test4", "Mary"));
-            customers.add(new Customer("test6", "test6", "David"));
+        arrayList.add(new Shop("test1", "test1", "Shop1", "retail"));
+        arrayList.get(0).getInventory().add(new Product(arrayList.get(0), "abc", 2.5, true));
+        arrayList.get(0).getInventory().add(new Product(arrayList.get(0), "def", 12.45672));
 
-            customers.get(0).getPurchases().add(new Purchase(customers.get(0), 5, shops.get(0).getInventory().get(0), 15));
-            customers.get(0).getPurchases().add(new Purchase(customers.get(0), 4, shops.get(0).getInventory().get(1), 20.4));
-            customers.get(1).getPurchases().add(new Purchase(customers.get(1), 1, shops.get(1).getInventory().get(0), 4.535));
-            customers.get(1).getPurchases().add(new Purchase(customers.get(1), 12, shops.get(1).getInventory().get(1), 8.5));
-            customers.get(2).getPurchases().add(new Purchase(customers.get(2), 7, shops.get(2).getInventory().get(0), 32.4));
-            customers.get(2).getPurchases().add(new Purchase(customers.get(2), 5047, shops.get(2).getInventory().get(1), 127.1057542));
-        }
+        arrayList.add(new Shop("test3", "test3", "Shop2", "producer"));
+        arrayList.get(1).getInventory().add(new Product(arrayList.get(1), "ghi", 0.54, true));
+        arrayList.get(1).getInventory().add(new Product(arrayList.get(1), "jkl", 4.57, true));
+
+        arrayList.add(new Shop("test5", "test5", "Shop3", "mixed"));
+        arrayList.get(2).getInventory().add(new Product(arrayList.get(2), "mno", 1));
+        arrayList.get(2).getInventory().add(new Product(arrayList.get(2), "pqr", 27.645, true));
+
+        return arrayList;
+    }
+
+    private ArrayList<Customer> populateCustomers()
+    {
+        ArrayList<Customer> arrayList = new ArrayList<>(3);
+
+        arrayList.add(new Customer("test2", "test2", "George"));
+        arrayList.get(0).getPurchases().add(new Purchase(arrayList.get(0), 5, DEFAULT_SHOPS.get(0).getInventory().get(0), 15));
+        arrayList.get(0).getPurchases().add(new Purchase(arrayList.get(0), 4, DEFAULT_SHOPS.get(0).getInventory().get(1), 20.4));
+
+        arrayList.add(new Customer("test4", "test4", "Mary"));
+        arrayList.get(1).getPurchases().add(new Purchase(arrayList.get(1), 1, DEFAULT_SHOPS.get(1).getInventory().get(0), 4.535));
+        arrayList.get(1).getPurchases().add(new Purchase(arrayList.get(1), 12, DEFAULT_SHOPS.get(1).getInventory().get(1), 8.5));
+
+        arrayList.add(new Customer("test6", "test6", "David"));
+        arrayList.get(2).getPurchases().add(new Purchase(arrayList.get(2), 7, DEFAULT_SHOPS.get(2).getInventory().get(0), 32.4));
+        arrayList.get(2).getPurchases().add(new Purchase(arrayList.get(2), 5047, DEFAULT_SHOPS.get(2).getInventory().get(1), 127.1057542));
+
+        return arrayList;
+    }
+
+    public void addDefaultData()
+    {
+        System.out.println("Before: ");
+        System.out.println(Arrays.toString(shops.toArray()));
+        System.out.println(Arrays.toString(customers.toArray()));
+        System.out.println("After: ");
+        shops.addAll(DEFAULT_SHOPS);
+        System.out.println(Arrays.toString(shops.toArray()));
+        customers.addAll(DEFAULT_CUSTOMERS);
+        System.out.println(Arrays.toString(customers.toArray()));
+        loadUsers();
+    }
+
+    public void removeDefaultData()
+    {
+        System.out.println("Before: ");
+        System.out.println(Arrays.toString(shops.toArray()));
+        System.out.println(Arrays.toString(customers.toArray()));
+        System.out.println("After: ");
+        shops.removeIf(shop -> hasUser(shop.getUsername()));
+        System.out.println(Arrays.toString(shops.toArray()));
+        customers.removeIf(customer -> hasUser(customer.getUsername()));
+        System.out.println(Arrays.toString(customers.toArray()));
+        loadUsers();
+    }
+
+    public boolean defaultDataExists()
+    {
+        return defaultShopsExists() || defaultCustomersExists();
+    }
+
+    private boolean defaultShopsExists()
+    {
+        return DEFAULT_SHOPS.stream().anyMatch(shop -> hasUser(shop.getUsername()));
+    }
+
+    private boolean defaultCustomersExists()
+    {
+        return DEFAULT_CUSTOMERS.stream().anyMatch(customer -> hasUser(customer.getUsername()));
     }
 
     public ArrayList<Shop> getShops()
