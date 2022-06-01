@@ -24,6 +24,8 @@ public class ListController
     private TableColumn<Product, String> tableName, tableInfo, tableCost;
     @FXML
     private TableColumn<Product, Boolean> tableAvailable;
+    @FXML
+    private TableColumn<Product, Product> tableOptions;
 
     public void initialize()
     {
@@ -42,7 +44,46 @@ public class ListController
         tableCost.setCellValueFactory(cellData -> new SimpleStringProperty(Double.toString(cellData.getValue().getCost())));
         tableCost.setCellFactory(TextFieldTableCell.forTableColumn());
         tableAvailable.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isAvailable()));
+        tableOptions.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue()));
+        setCellEditFields();
+    }
+
+    private void setCellEditFields()
+    {
+        tableName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableInfo.setCellFactory(TextFieldTableCell.forTableColumn());
+        tableCost.setCellFactory(TextFieldTableCell.forTableColumn());
         tableAvailable.setCellFactory(ChoiceBoxTableCell.forTableColumn(Boolean.TRUE, Boolean.FALSE));
+        tableOptions.setCellFactory(cellData -> new TableCell<>()
+        {
+            private final Button btnDelete = new Button("Delete");
+
+            @Override
+            protected void updateItem(Product product, boolean empty)
+            {
+                super.updateItem(product, empty);
+
+                if (product == null)
+                {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(btnDelete);
+                btnDelete.setOnAction(ignoredEvent ->
+                                      {
+                                          getTableView().getItems().remove(product);
+                                          deleteRow(product);
+                                      });
+            }
+        });
+    }
+
+    private void deleteRow(Product toRemove)
+    {
+        Main.data.getProducts()
+                 .removeIf(product -> product.equals(toRemove));
+        save();
     }
 
     public void saveNameChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
