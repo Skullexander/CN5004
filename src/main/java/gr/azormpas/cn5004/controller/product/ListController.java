@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -44,7 +45,7 @@ public class ListController
         tableAvailable.setCellFactory(ChoiceBoxTableCell.forTableColumn(Boolean.TRUE, Boolean.FALSE));
     }
 
-    public void saveNameChange(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent)
+    public void saveNameChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
     {
         Main.data.getShops()
                  .get(Main.data.getLoggedUserLocation())
@@ -54,7 +55,7 @@ public class ListController
         save();
     }
 
-    public void saveInfoChange(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent)
+    public void saveInfoChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
     {
         Main.data.getShops()
                  .get(Main.data.getLoggedUserLocation())
@@ -64,7 +65,7 @@ public class ListController
         save();
     }
 
-    public void saveCostChange(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent)
+    public void saveCostChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
     {
         if(productStringCellEditEvent.getNewValue().matches("^\\d{1,8}\\.\\d{2}$"))
         {
@@ -82,7 +83,7 @@ public class ListController
         }
     }
 
-    public void saveAvailableChange(TableColumn.CellEditEvent<Product, Boolean> productBooleanCellEditEvent)
+    public void saveAvailableChange(TableColumn.@NotNull CellEditEvent<Product, Boolean> productBooleanCellEditEvent)
     {
         Main.data.getShops()
                  .get(Main.data.getLoggedUserLocation())
