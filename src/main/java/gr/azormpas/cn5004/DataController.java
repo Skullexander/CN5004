@@ -250,6 +250,16 @@ public class DataController
         return customers;
     }
 
+    public ArrayList<Product> getProducts()
+    {
+        return shops.get(getLoggedUserLocation()).getInventory();
+    }
+
+    public ArrayList<Purchase> getPurchases()
+    {
+        return customers.get(getLoggedUserLocation()).getPurchases();
+    }
+
     public Settings getSettings()
     {
         return settings;
