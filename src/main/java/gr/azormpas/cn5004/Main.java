@@ -21,7 +21,8 @@ public class Main
         throws IOException
     {
         stage = primaryStage;
-        stage.setTitle("CN5004");
+        stage.setTitle("CN5004 - Ordering Application");
+        isStageResizeable(false);
         loadScene("Login");
         stage.show();
     }
