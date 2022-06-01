@@ -83,31 +83,31 @@ public class HomeController
     public void viewUserList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("UserList"));
+        Main.loadScene(setTypeView("user/List"));
     }
 
     public void viewShopList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("ShopList"));
+        Main.loadScene(setTypeView("shop/List"));
     }
 
     public void viewCustomerList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("CustomerList"));
+        Main.loadScene(setTypeView("customer/List"));
     }
 
     public void viewProductList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("List"));
+        Main.loadScene("product/List");
     }
 
     public void viewPurchaseList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("PurchaseList"));
+        Main.loadScene(setTypeView("purchase/List"));
     }
 
     private String setTypeView(String view)
