@@ -34,22 +34,18 @@ public class AddController
         }
         else
         {
-            Main.data.getShops()
-                     .get(Main.data.getLoggedUserLocation())
-                     .getInventory()
-                     .add(new Product(
-                         Main.data.getShops().get(Main.data.getLoggedUserLocation()),
-                         fldName.getText(),
-                         Double.parseDouble(fldCost.getText()),
-                         chkIsAvailable.isSelected()));
+            Main.data.getProducts()
+                .add(new Product(
+                    Main.data.getShops().get(Main.data.getLoggedUserLocation()),
+                    fldName.getText(),
+                    Double.parseDouble(fldCost.getText()),
+                    chkIsAvailable.isSelected()));
 
-            Main.data.getShops()
-                     .get(Main.data.getLoggedUserLocation())
-                     .getInventory()
-                     .get(Main.data.getShops()
-                                   .get(Main.data.getLoggedUserLocation())
-                                   .getInventory().size()-1)
-                     .setInfo(fldInfo.getText());
+            Main.data.getProducts()
+                .get(Main.data.getProducts().size()-1)
+                .setInfo(fldInfo.getText());
+            new Alert(AlertType.INFORMATION, String.format("Product %s was created successfully", fldName.getText())).show();
+            Main.loadScene("product/List");
         }
     }
 
