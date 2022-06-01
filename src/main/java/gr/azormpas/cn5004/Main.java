@@ -39,7 +39,12 @@ public class Main
         stage.setScene(new Scene(pane));
     }
 
-    public static URL getResource(String path)
+    public static void isStageResizeable(boolean b)
+    {
+        stage.setResizable(b);
+    }
+
+    private static URL getResource(String path)
     {
         return Objects.requireNonNull(Main.class.getResource(path));
     }
