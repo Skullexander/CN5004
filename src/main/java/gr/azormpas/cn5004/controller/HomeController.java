@@ -118,6 +118,7 @@ public class HomeController
     public void exit(ActionEvent ignoredEvent)
         throws IOException
     {
+        Main.data.saveData();
         Main.loadScene("Login");
     }
 
