@@ -10,6 +10,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class AddController
 {
     @FXML
@@ -19,7 +21,8 @@ public class AddController
     @FXML
     private CheckBox chkIsAvailable;
 
-    public void addProduct(ActionEvent ignoredEvent)
+    public void confirm(ActionEvent ignoredEvent)
+        throws IOException
     {
         if (fldName.getText().isBlank())
         {
