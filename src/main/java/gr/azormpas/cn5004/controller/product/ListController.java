@@ -34,14 +34,13 @@ public class ListController
     {
         ObservableList<Product> list = FXCollections.observableArrayList();
         setCellValues();
-        list.addAll(Main.data.getShops().get(Main.data.getLoggedUserLocation()).getInventory());
+        list.addAll(Main.data.getProducts());
         table.setItems(list);
     }
 
     private void setCellValues()
     {
         tableName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        tableName.setCellFactory(TextFieldTableCell.forTableColumn());
         tableInfo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
         tableInfo.setCellFactory(TextFieldTableCell.forTableColumn());
         tableCost.setCellValueFactory(cellData -> new SimpleStringProperty(Double.toString(cellData.getValue().getCost())));
@@ -91,19 +90,15 @@ public class ListController
 
     public void saveNameChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
     {
-        Main.data.getShops()
-                 .get(Main.data.getLoggedUserLocation())
-                 .getInventory()
-                 .get(productStringCellEditEvent.getTablePosition().getRow())
-                 .setName(productStringCellEditEvent.getNewValue());
+         Main.data.getProducts()
+                  .get(productStringCellEditEvent.getTablePosition().getRow())
+                  .setName(productStringCellEditEvent.getNewValue());
         save();
     }
 
     public void saveInfoChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
     {
-        Main.data.getShops()
-                 .get(Main.data.getLoggedUserLocation())
-                 .getInventory()
+        Main.data.getProducts()
                  .get(productStringCellEditEvent.getTablePosition().getRow())
                  .setInfo(productStringCellEditEvent.getNewValue());
         save();
@@ -113,9 +108,7 @@ public class ListController
     {
         if(productStringCellEditEvent.getNewValue().matches("^\\d{1,8}\\.\\d{2}$"))
         {
-            Main.data.getShops()
-                     .get(Main.data.getLoggedUserLocation())
-                     .getInventory()
+            Main.data.getProducts()
                      .get(productStringCellEditEvent.getTablePosition().getRow())
                      .setCost(Double.parseDouble(productStringCellEditEvent.getNewValue()));
             save();
@@ -129,9 +122,7 @@ public class ListController
 
     public void saveAvailableChange(TableColumn.@NotNull CellEditEvent<Product, Boolean> productBooleanCellEditEvent)
     {
-        Main.data.getShops()
-                 .get(Main.data.getLoggedUserLocation())
-                 .getInventory()
+        Main.data.getProducts()
                  .get(productBooleanCellEditEvent.getTablePosition().getRow())
                  .setAvailable(productBooleanCellEditEvent.getNewValue());
         save();
