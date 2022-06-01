@@ -49,8 +49,9 @@ public class AddController
         }
     }
 
-    public void cancelAdd(ActionEvent ignoredEvent)
+    public void exit(ActionEvent ignoredEvent)
+        throws IOException
     {
-        btnCancel.getScene().getWindow().hide();
+        Main.loadScene("product/List");
     }
 }
