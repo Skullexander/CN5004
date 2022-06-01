@@ -36,6 +36,10 @@ public class LoginController
             }
             if (Main.data.getSettings().isUseDefaultData())
             {
+                if (!Main.data.defaultDataExists())
+                {
+                    Main.data.addDefaultData();
+                }
                 chkDefaultData.setSelected(true);
             }
         }
@@ -49,6 +53,14 @@ public class LoginController
         throws IOException
     {
         Main.data.getSettings().setUseDefaultData(chkDefaultData.isSelected());
+        if (Main.data.defaultDataExists())
+        {
+            Main.data.removeDefaultData();
+        }
+        else
+        {
+            Main.data.addDefaultData();
+        }
         Main.data.saveSettings();
     }
 
