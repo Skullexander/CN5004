@@ -85,6 +85,15 @@ public class Purchase extends Customer implements Serializable
         return result.toString();
     }
 
+    public String getTotalItems()
+    {
+        int i = 0;
+        for (int j : getItems().values())
+        {
+            i += j;
+        }
+        return String.format("Total: %d", i);
+    }
     public String getStatus()
     {
         switch (this.state)
