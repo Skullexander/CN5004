@@ -77,25 +77,25 @@ public class HomeController
     public void viewProfile(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("Profile"));
+        Main.loadScene("Profile");
     }
 
     public void viewUserList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("user/List"));
+        Main.loadScene("user/List");
     }
 
     public void viewShopList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("shop/List"));
+        Main.loadScene("shop/List");
     }
 
     public void viewCustomerList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("customer/List"));
+        Main.loadScene("customer/List");
     }
 
     public void viewProductList(ActionEvent ignoredEvent)
@@ -107,12 +107,7 @@ public class HomeController
     public void viewPurchaseList(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene(setTypeView("purchase/List"));
-    }
-
-    private String setTypeView(String view)
-    {
-        return String.format("%s/%s",type ,view);
+        Main.loadScene("purchase/List");
     }
 
     public void exit(ActionEvent ignoredEvent)
