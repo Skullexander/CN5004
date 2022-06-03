@@ -14,6 +14,7 @@ public class Purchase extends Customer implements Serializable
     public Purchase (Customer customer, int amount, Product product, double cost)
     {
         super(customer);
+        setID();
         this.setDate(String.valueOf(new java.util.Date()));
         this.setItems(new HashMap<>());
         this.getItems().put(product, amount);
@@ -24,6 +25,7 @@ public class Purchase extends Customer implements Serializable
     public Purchase (Customer customer, HashMap<Product, Integer> items, double cost)
     {
         super(customer);
+        setID();
         this.setDate(String.valueOf(new java.util.Date()));
         this.setItems(items);
         this.setCost(cost);
@@ -34,9 +36,10 @@ public class Purchase extends Customer implements Serializable
     {
         return ID;
     }
-    public void setID(int ID)
+    private void setID()
     {
-        this.ID = ID;
+        int range = (99999999 - 1) + 1;
+        this.ID = (int)(Math.random() * range) + 1;;
     }
     public String getDate()
     {
