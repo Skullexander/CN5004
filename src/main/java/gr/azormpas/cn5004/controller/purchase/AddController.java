@@ -45,28 +45,29 @@ public class AddController
     public void confirm(ActionEvent ignoredEvent)
         throws IOException
     {
-        if (fldName.getText().isBlank())
+        if (btnShop.getSelectionModel().isEmpty())
         {
-            new Alert(AlertType.ERROR, "Product name is empty or blank.").show();
+            new Alert(Alert.AlertType.ERROR, "Shop is empty or blank.").show();
         }
-        else if (fldCost.getText().isBlank() && fldCost.getText().matches("^\\d{1,8}\\.\\d{2}$"))
+        else if (btnItem.getSelectionModel().isEmpty())
         {
-            new Alert(AlertType.ERROR, "Product cost invalid. Mandatory use of exactly two decimals (example: 12.00)").show();
+            new Alert(Alert.AlertType.ERROR, "Item is empty or black.").show();
+        }
+        else if(fldAmount.getText().isBlank() || !fldAmount.getText().matches("^[1-9]\\d*$"))
+        {
+            new Alert(Alert.AlertType.ERROR, "Item amount is invalid.").show();
         }
         else
         {
-            Main.data.getProducts()
-                .add(new Product(
-                    Main.data.getShops().get(Main.data.getLoggedUserLocation()),
-                    fldName.getText(),
-                    Double.parseDouble(fldCost.getText()),
-                    chkIsAvailable.isSelected()));
+            Main.data.getPurchases()
+                     .add(new Purchase(
+                         Main.data.getCustomers().get(Main.data.getLoggedUserLocation()),
+                         Integer.parseInt(fldAmount.getText()),
+                         btnItem.getSelectionModel().getSelectedItem(),
+                         calculateTotal()));
 
-            Main.data.getProducts()
-                .get(Main.data.getProducts().size()-1)
-                .setInfo(fldInfo.getText());
-            new Alert(AlertType.INFORMATION, String.format("Product %s was created successfully", fldName.getText())).show();
-            Main.loadScene("product/List");
+            new Alert(Alert.AlertType.INFORMATION, String.format("Purchase no. %d was created successfully", Main.data.getPurchases().get(Main.data.getPurchases().size()-1).getID())).show();
+            Main.loadScene("purchase/List");
         }
     }
 
