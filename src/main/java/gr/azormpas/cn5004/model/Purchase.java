@@ -7,7 +7,7 @@ public class Purchase extends Customer implements Serializable
 {
     private int ID;
     private String date;
-    private HashMap<Integer, Product> items;
+    private HashMap<Product, Integer> items;
     private double cost;
     private int state;
 
@@ -16,12 +16,12 @@ public class Purchase extends Customer implements Serializable
         super(customer);
         this.setDate(String.valueOf(new java.util.Date()));
         this.setItems(new HashMap<>());
-        this.getItems().put(amount, product);
+        this.getItems().put(product, amount);
         this.setCost(cost);
         this.setState(0);
     }
 
-    public Purchase (Customer customer, HashMap<Integer, Product> items, double cost)
+    public Purchase (Customer customer, HashMap<Product, Integer> items, double cost)
     {
         super(customer);
         this.setDate(String.valueOf(new java.util.Date()));
@@ -46,11 +46,11 @@ public class Purchase extends Customer implements Serializable
     {
         this.date = date;
     }
-    public HashMap<Integer, Product> getItems()
+    public HashMap<Product, Integer> getItems()
     {
         return items;
     }
-    public void setItems(HashMap<Integer, Product> items)
+    public void setItems(HashMap<Product, Integer> items)
     {
         this.items = items;
     }
