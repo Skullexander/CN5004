@@ -11,6 +11,8 @@ public class Customer extends User implements Serializable
     public Customer (Customer customer)
     {
         super(customer.getUsername(), customer.getPassword());
+        this.setName(customer.getName());
+        this.setPurchase(customer.getPurchases());
     }
 
     public Customer(String username, String password, String name)

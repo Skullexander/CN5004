@@ -13,6 +13,10 @@ public class Shop extends User implements Serializable
     public Shop (Shop shop)
     {
         super(shop.getUsername(), shop.getPassword());
+        this.setShopName(shop.getShopName());
+        this.setType(shop.getType());
+        this.setDetails(shop.getDetails());
+        this.setInventory(shop.getInventory());
     }
 
     public Shop(String username, String password, String name, String type)
