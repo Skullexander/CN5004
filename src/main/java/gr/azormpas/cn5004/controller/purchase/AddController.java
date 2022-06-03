@@ -52,6 +52,6 @@ public class AddController
     public void exit(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene("product/List");
+        Main.loadScene("purchase/List");
     }
 }
