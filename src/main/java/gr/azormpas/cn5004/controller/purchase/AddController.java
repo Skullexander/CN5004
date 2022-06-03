@@ -70,6 +70,16 @@ public class AddController
         }
     }
 
+    public void calculate(ActionEvent ignoredEvent)
+    {
+        txtTotal.setText(String.format("%.2f", calculateTotal()));
+    }
+
+    private double calculateTotal()
+    {
+        return (btnItem.getSelectionModel().getSelectedItem().getCost() * Integer.parseInt(fldAmount.getText()));
+    }
+
     public void exit(ActionEvent ignoredEvent)
         throws IOException
     {
