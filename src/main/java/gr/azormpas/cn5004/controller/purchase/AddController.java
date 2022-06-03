@@ -2,12 +2,15 @@ package gr.azormpas.cn5004.controller.purchase;
 
 import gr.azormpas.cn5004.Main;
 import gr.azormpas.cn5004.model.Product;
+import gr.azormpas.cn5004.model.Purchase;
+import gr.azormpas.cn5004.model.Shop;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -15,11 +18,29 @@ import java.io.IOException;
 public class AddController
 {
     @FXML
-    private TextField fldName, fldCost;
+    private ChoiceBox<Shop> btnShop;
     @FXML
-    private TextArea fldInfo;
+    private ChoiceBox<Product> btnItem;
     @FXML
-    private CheckBox chkIsAvailable;
+    private TextField fldAmount;
+    @FXML
+    private Label txtTotal;
+
+    public void initialize()
+    {
+        ObservableList<Product> listProducts = FXCollections.observableArrayList();
+        ObservableList<Shop> listShops = FXCollections.observableArrayList(Main.data.getShops());
+        btnItem.setDisable(true);
+        btnShop.setItems(listShops);
+        btnShop.setOnAction(event ->
+                            {
+                                btnItem.setDisable(false);
+                                listProducts.clear();
+                                listProducts.addAll(btnShop.getSelectionModel().getSelectedItem().getInventory());
+                                btnItem.setItems(listProducts);
+                            });
+        btnItem.setOnAction(event -> txtTotal.setText("--.--"));
+    }
 
     public void confirm(ActionEvent ignoredEvent)
         throws IOException
