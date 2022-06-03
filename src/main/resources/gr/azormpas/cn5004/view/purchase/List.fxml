@@ -11,13 +11,13 @@
 <?import javafx.scene.text.Font?>
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr.azormpas.cn5004.controller.purchase.ListController">
    <center>
-      <TableView fx:id="table" editable="true" fixedCellSize="30.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" fixedCellSize="30.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="tableName" minWidth="30.0" onEditCommit="#saveNameChange" text="Name" />
-            <TableColumn fx:id="tableInfo" minWidth="30.0" onEditCommit="#saveInfoChange" sortable="false" text="Info" />
-            <TableColumn fx:id="tableCost" minWidth="30.0" onEditCommit="#saveCostChange" text="Cost" />
-            <TableColumn fx:id="tableAvailable" minWidth="30.0" onEditCommit="#saveAvailableChange" text="Available" />
-            <TableColumn fx:id="tableOptions" minWidth="30.0" sortable="false" text="Options" />
+          <TableColumn fx:id="tableID" editable="false" minWidth="30.0" text="ID" />
+            <TableColumn fx:id="tableDate" editable="false" minWidth="30.0" text="Date" />
+            <TableColumn fx:id="tableItems" editable="false" minWidth="30.0" text="Items" />
+            <TableColumn fx:id="tableCost" editable="false" minWidth="30.0" text="Cost" />
+            <TableColumn fx:id="tableState" editable="false" minWidth="30.0" text="State" />
         </columns>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -30,7 +30,7 @@
    <top>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label contentDisplay="RIGHT" text="View Products">
+            <Label contentDisplay="RIGHT" text="View Purchases">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -51,7 +51,7 @@
                 <Button fx:id="btnHome" defaultButton="true" mnemonicParsing="false" onAction="#exit" text="⬅" />
                </graphic>
             </Label>
-            <Label text="Add Product">
+            <Label text="Add Purchase">
                <graphic>
                   <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#viewAdd" text="➕" />
                </graphic>
