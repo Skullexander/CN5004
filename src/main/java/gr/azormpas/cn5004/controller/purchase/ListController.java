@@ -1,10 +1,8 @@
 package gr.azormpas.cn5004.controller.purchase;
 
 import gr.azormpas.cn5004.Main;
-import gr.azormpas.cn5004.model.Product;
 import gr.azormpas.cn5004.model.Purchase;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,29 +23,25 @@ public class ListController
     @FXML
     private TableView<Purchase> table;
     @FXML
-    private TableColumn<Purchase, String> tableName, tableInfo, tableCost;
+    private TableColumn<Purchase, String> tableID, tableDate, tableCost, tableState;
     @FXML
-    private TableColumn<Purchase, Boolean> tableAvailable;
-    @FXML
-    private TableColumn<Purchase, Purchase> tableOptions;
+    private TableColumn<Purchase, Purchase> tableItems;
 
     public void initialize()
     {
-        ObservableList<Product> list = FXCollections.observableArrayList();
+        ObservableList<Purchase> list = FXCollections.observableArrayList();
         setCellValues();
-        list.addAll(Main.data.getProducts());
+        list.addAll(Main.data.getPurchases());
         table.setItems(list);
     }
 
     private void setCellValues()
     {
-        tableName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        tableInfo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
-        tableCost.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f", cellData.getValue().getCost())));
-        tableAvailable.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isAvailable()));
-        tableOptions.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue()));
-        setCellEditFields();
-    }
+        tableID.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%d",cellData.getValue().getID())));
+        tableDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
+        tableItems.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue()));
+        tableCost.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f €", cellData.getValue().getCost())));
+        tableState.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
 
     private void setCellEditFields()
     {
