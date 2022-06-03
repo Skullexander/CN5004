@@ -77,7 +77,12 @@ public class Purchase extends Customer implements Serializable
     @Override
     public String toString()
     {
-        return "Purchase{" + "ID=" + ID + ", date='" + date + '\'' + ", cost=" + cost + ", state=" + state + '}';
+        StringBuilder result = new StringBuilder();
+        for (Product product : getItems().keySet())
+        {
+            result.append(String.format("%dx %s\n", getItems().get(product), product.toString()));
+        }
+        return result.toString();
     }
 
     public String getStatus()
