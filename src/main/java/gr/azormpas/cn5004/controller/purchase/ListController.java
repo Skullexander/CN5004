@@ -70,7 +70,7 @@ public class ListController
     public void viewAdd(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.loadScene("product/Add");
+        Main.loadScene("purchase/Add");
     }
 
     public void exit(ActionEvent ignoredEvent)
