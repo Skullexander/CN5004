@@ -8,13 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.ChoiceBoxTableCell;
-import javafx.scene.control.cell.TextFieldTableCell;
-import org.jetbrains.annotations.NotNull;
+import javafx.scene.control.Tooltip;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -43,94 +42,29 @@ public class ListController
         tableCost.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f €", cellData.getValue().getCost())));
         tableState.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
 
-    private void setCellEditFields()
-    {
-        tableName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableInfo.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableCost.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableAvailable.setCellFactory(ChoiceBoxTableCell.forTableColumn(Boolean.TRUE, Boolean.FALSE));
-        tableOptions.setCellFactory(cellData -> new TableCell<>()
-        {
-            private final Button btnDelete = new Button("Delete");
+        tableItems.setCellFactory(cellData -> new TableCell<>()
+                                  {
+                                      private final Label itemLabel = new Label();
 
-            @Override
-            protected void updateItem(Product product, boolean empty)
-            {
-                super.updateItem(product, empty);
-
-                if (product == null)
-                {
-                    setGraphic(null);
-                    return;
-                }
-
-                setGraphic(btnDelete);
-                btnDelete.setOnAction(ignoredEvent ->
+                                      @Override
+                                      protected void updateItem(Purchase purchase, boolean empty)
                                       {
-                                          getTableView().getItems().remove(product);
-                                          deleteRow(product);
-                                      });
-            }
-        });
-    }
+                                          super.updateItem(purchase, empty);
 
-    private void deleteRow(Product toRemove)
-    {
-        Main.data.getProducts()
-                 .removeIf(product -> product.equals(toRemove));
-        save();
-    }
+                                          if (purchase == null)
+                                          {
+                                              setGraphic(null);
+                                              return;
+                                          }
 
-    public void saveNameChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
-    {
-         Main.data.getProducts()
-                  .get(productStringCellEditEvent.getTablePosition().getRow())
-                  .setName(productStringCellEditEvent.getNewValue());
-        save();
-    }
 
-    public void saveInfoChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
-    {
-        Main.data.getProducts()
-                 .get(productStringCellEditEvent.getTablePosition().getRow())
-                 .setInfo(productStringCellEditEvent.getNewValue());
-        save();
-    }
-
-    public void saveCostChange(TableColumn.@NotNull CellEditEvent<Product, String> productStringCellEditEvent)
-    {
-        if(productStringCellEditEvent.getNewValue().matches("^\\d{1,8}\\.\\d{2}$"))
-        {
-            Main.data.getProducts()
-                     .get(productStringCellEditEvent.getTablePosition().getRow())
-                     .setCost(Double.parseDouble(productStringCellEditEvent.getNewValue()));
-            save();
-        }
-        else
-        {
-            tableCost.getCellFactory().call(productStringCellEditEvent.getTableColumn()).cancelEdit();
-            table.refresh();
-        }
-    }
-
-    public void saveAvailableChange(TableColumn.@NotNull CellEditEvent<Product, Boolean> productBooleanCellEditEvent)
-    {
-        Main.data.getProducts()
-                 .get(productBooleanCellEditEvent.getTablePosition().getRow())
-                 .setAvailable(productBooleanCellEditEvent.getNewValue());
-        save();
-    }
-
-    private void save()
-    {
-        try
-        {
-            Main.data.saveShops();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+                                          Tooltip tooltip = new Tooltip(purchase.toString());
+                                          tooltip.setShowDelay(Duration.millis(2));
+                                          itemLabel.setText(purchase.getTotalItems());
+                                          itemLabel.setTooltip(tooltip);
+                                          setGraphic(itemLabel);
+                                      }
+                                  });
     }
 
     public void viewAdd(ActionEvent ignoredEvent)
