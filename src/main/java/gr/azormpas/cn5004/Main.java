@@ -34,6 +34,14 @@ public class Main
         return FXMLLoader.load(getResource(String.format("view/%s.fxml", fxml)));
     }
 
+    public static Parent loadFXML(String fxml, Object object)
+        throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getResource(String.format("view/%s.fxml", fxml)));
+        loader.setController(object);
+        return loader.load();
+    }
+
     public static void loadScene(String fxml)
         throws IOException
     {
