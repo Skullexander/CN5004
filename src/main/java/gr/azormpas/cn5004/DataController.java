@@ -63,7 +63,7 @@ public class DataController
     private void loadSettings(boolean exists)
         throws IOException, ClassNotFoundException
     {
-        System.out.println("Loading Settings...");
+        System.out.print("Loading Settings...\t");
         if (exists)
         {
             settings = new Settings();
@@ -153,7 +153,7 @@ public class DataController
             users.clear();
             System.out.println("Cleared old User credentials!");
         }
-        System.out.println("Fetching Shop User credentials...");
+        System.out.print("Fetching Shop User credentials...\t");
         if (shops.size() != 0)
         {
             for (Shop shop : shops)
@@ -167,7 +167,7 @@ public class DataController
         {
             System.out.println("No Shop Users found.");
         }
-        System.out.println("Fetching Customer User credentials...");
+        System.out.print("Fetching Customer User credentials...\t");
         if (customers.size() != 0)
         {
             for (Customer customer : customers)
@@ -241,7 +241,7 @@ public class DataController
         return userDetails[1];
     }
 
-    private boolean hasUser(String value)
+    public boolean hasUser(String value)
     {
         return users.containsKey(value);
     }
