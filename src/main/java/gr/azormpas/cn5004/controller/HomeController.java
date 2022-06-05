@@ -31,17 +31,29 @@ public class HomeController
     {
         txtName.setText(getUsername());
         checkType();
-        if (type.equals("shop"))
+        switch (type)
         {
-            btnUserList.setVisible(false);
-            btnShopList.setVisible(false);
-            btnCustomerList.setVisible(false);
-        }
-        else if (type.equals("customer"))
-        {
-            btnUserList.setVisible(false);
-            btnCustomerList.setVisible(false);
-            btnProductList.setVisible(false);
+            case("shop"):
+                btnUserList.setVisible(false);
+                btnShopList.setVisible(false);
+                btnCustomerList.setVisible(false);
+                break;
+            case("customer"):
+                btnUserList.setVisible(false);
+                btnShopList.setVisible(false);
+                btnCustomerList.setVisible(false);
+                btnProductList.setVisible(false);
+                break;
+            case("none"):
+                btnProfile.setVisible(false);
+                btnUserList.setVisible(false);
+                btnShopList.setVisible(false);
+                btnCustomerList.setVisible(false);
+                btnProductList.setVisible(false);
+                btnPurchaseList.setVisible(false);
+                break;
+            default:
+                break;
         }
         boxOptions.getChildren().removeIf(node -> !node.isVisible());
     }
@@ -65,9 +77,9 @@ public class HomeController
     {
         switch(Main.data.getLoggedUserType())
         {
-            case(0):
-                type = "admin";
-                break;
+            //case(0):
+            //    type = "admin";
+            //    break;
             case(1):
                 type = "shop";
                 break;
@@ -75,11 +87,11 @@ public class HomeController
                 type = "customer";
                 break;
             default:
+                type = "none";
                 try
                 {
-                    alert = new Alert(Alert.AlertType.ERROR, "User does not exist. Returning to Verification Portal.");
-                    alert.show();
-                    exit(new ActionEvent());
+                    new Alert(Alert.AlertType.ERROR, "User does not exist. Return to Verification Portal.").show();
+                    Main.loadScene("Login");
                 }
                 catch (IOException e)
                 {
@@ -128,7 +140,10 @@ public class HomeController
     public void exit(ActionEvent ignoredEvent)
         throws IOException
     {
-        Main.data.saveData();
+        if (!type.equals("none"))
+        {
+            Main.data.saveData();
+        }
         Main.loadScene("Login");
     }
 
