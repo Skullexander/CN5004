@@ -372,6 +372,14 @@ public class DataController
         return DEFAULT_CUSTOMERS.stream().anyMatch(customer -> hasUser(customer.getUsername()));
     }
 
+    public ArrayList<String> getDefaultUsers()
+    {
+        ArrayList<String> array = new ArrayList<>();
+        DEFAULT_SHOPS.forEach(shop -> array.add(shop.getUsername()));
+        DEFAULT_CUSTOMERS.forEach(customer -> array.add(customer.getUsername()));
+        return array;
+    }
+
     public ArrayList<Shop> getShops()
     {
         return shops;
