@@ -1,10 +1,12 @@
 package gr.azormpas.cn5004.controller;
 
+import gr.azormpas.cn5004.HostServicesProvider;
 import gr.azormpas.cn5004.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -56,6 +58,10 @@ public class LoginController
         throws IOException
     {
         Main.data.getSettings().setUseDefaultData(chkDefaultData.isSelected());
+        if (chkDefaultData.isSelected())
+        {
+            showDefaultDataAlert();
+        }
         if (Main.data.defaultDataExists())
         {
             Main.data.removeDefaultData();
@@ -65,6 +71,12 @@ public class LoginController
             Main.data.addDefaultData();
         }
         Main.data.saveSettings();
+    }
+
+    private void showDefaultDataAlert()
+    {
+        new Alert(Alert.AlertType.INFORMATION, String.format("Default Data is ENABLED!\nUse one of the following as Username AND Password.\n%s",
+                                                             Main.data.getDefaultUsers())).show();
     }
 
     public void toggleRemember (ActionEvent ignoredEvent)
