@@ -5,44 +5,72 @@ import java.util.ArrayList;
 
 public class Customer extends User implements Serializable
 {
-    private String name;
+    private String customerName, address, country;
     private ArrayList<Purchase> purchase;
 
     public Customer (Customer customer)
     {
         super(customer.getUsername(), customer.getPassword());
-        this.setName(customer.getName());
-        this.setPurchase(customer.getPurchases());
+        this.setCustomerName(customer.getCustomerName());
+        this.setPurchases(customer.getPurchases());
+        this.setAddress(customer.getAddress());
+        this.setCountry(customer.getCountry());
     }
 
-    public Customer(String username, String password, String name)
+    public Customer(String username, String password, String name, String address, String country)
     {
         super(username, password);
-        this.setName(name);
-        this.setPurchase(new ArrayList<>());
+        this.setCustomerName(name);
+        this.setAddress(address);
+        this.setCountry(country);
+        this.setPurchases(new ArrayList<>());
     }
 
-    public Customer(String username, String password, String name, ArrayList<Purchase> purchase)
+    public Customer(String username, String password, String name, String address, String country, ArrayList<Purchase> purchase)
     {
         super(username, password);
-        this.setName(name);
-        this.setPurchase(purchase);
+        this.setCustomerName(name);
+        this.setAddress(address);
+        this.setCountry(country);
+        this.setPurchases(purchase);
     }
 
-    public String getName()
+    public String getCustomerName()
     {
-        return name;
+        return customerName;
     }
-    public void setName(String name)
+    public void setCustomerName(String name)
     {
-        this.name = name;
+        this.customerName = name;
     }
     public ArrayList<Purchase> getPurchases()
     {
         return purchase;
     }
-    public void setPurchase(ArrayList<Purchase> purchase)
+    public void setPurchases(ArrayList<Purchase> purchase)
     {
         this.purchase = purchase;
+    }
+    public String getAddress()
+    {
+        return address;
+    }
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+    public String getCountry()
+    {
+        return country;
+    }
+    public void setCountry(String country)
+    {
+        this.country = country;
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("%s (%s @%s)", getCustomerName(), getAddress(), getCountry());
     }
 }
