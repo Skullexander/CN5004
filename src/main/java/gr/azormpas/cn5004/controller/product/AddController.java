@@ -28,7 +28,7 @@ public class AddController
         {
             new Alert(AlertType.ERROR, "Product name is empty or blank.").show();
         }
-        else if (fldCost.getText().isBlank() && fldCost.getText().matches("^\\d{1,8}\\.\\d{2}$"))
+        else if (fldCost.getText().isBlank() && !fldCost.getText().matches("^\\d{1,8}\\.\\d{2}$"))
         {
             new Alert(AlertType.ERROR, "Product cost invalid. Mandatory use of exactly two decimals (example: 12.00)").show();
         }
@@ -44,7 +44,7 @@ public class AddController
             Main.data.getProducts()
                 .get(Main.data.getProducts().size()-1)
                 .setInfo(fldInfo.getText());
-            new Alert(AlertType.INFORMATION, String.format("Product %s was created successfully", fldName.getText())).show();
+            new Alert(AlertType.CONFIRMATION, String.format("Product %s was created successfully", fldName.getText())).show();
             Main.loadScene("product/List");
         }
     }

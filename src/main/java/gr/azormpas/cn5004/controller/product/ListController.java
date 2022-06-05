@@ -42,7 +42,8 @@ public class ListController
     {
         tableName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         tableInfo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInfo()));
-        tableCost.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f", cellData.getValue().getCost())));
+        tableCost.setCellValueFactory(cellData -> new SimpleStringProperty(
+            String.format("%.2f", cellData.getValue().getCost())));
         tableAvailable.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isAvailable()));
         tableOptions.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue()));
         setCellEditFields();

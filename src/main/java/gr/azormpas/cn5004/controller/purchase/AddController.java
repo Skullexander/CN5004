@@ -66,7 +66,9 @@ public class AddController
                          btnItem.getSelectionModel().getSelectedItem(),
                          calculateTotal()));
 
-            new Alert(Alert.AlertType.INFORMATION, String.format("Purchase no. %d was created successfully", Main.data.getPurchases().get(Main.data.getPurchases().size()-1).getID())).show();
+            new Alert(Alert.AlertType.CONFIRMATION,
+                      String.format("Purchase no. %d was created successfully",
+                                    Main.data.getPurchases().get(Main.data.getPurchases().size()-1).getID())).show();
             Main.loadScene("purchase/List");
         }
     }
