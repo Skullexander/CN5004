@@ -25,7 +25,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <Button fx:id="btnProfile" layoutX="113.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewProfile" text="Edit Profile" />
+            <Button fx:id="btnProfile" disable="true" layoutX="113.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewProfile" text="Edit Profile" />
             <Button fx:id="btnUserList" mnemonicParsing="false" onAction="#viewUserList" text="View Users" />
             <Button fx:id="btnShopList" mnemonicParsing="false" onAction="#viewShopList" text="View Shops" />
             <Button fx:id="btnCustomerList" mnemonicParsing="false" onAction="#viewCustomerList" text="View Customers" />
