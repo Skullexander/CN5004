@@ -119,7 +119,7 @@ public class Purchase extends Customer implements Serializable
 
     public void updateStatus(String symbol)
     {
-        if (symbol.equals("+")) this.setState(Integer.sum(this.getState(), 1));
-        else this.setState(Integer.sum(this.getState(), -1));
+        if (symbol.equals("+") && getState() < 5) this.setState(Integer.sum(this.getState(), 1));
+        else if (symbol.equals("-") && getState() > -1) this.setState(Integer.sum(this.getState(), -1));
     }
 }
