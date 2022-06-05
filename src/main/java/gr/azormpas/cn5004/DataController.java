@@ -397,7 +397,25 @@ public class DataController
 
     public ArrayList<Purchase> getPurchases()
     {
-        return customers.get(getLoggedUserLocation()).getPurchases();
+        if (getLoggedUserType() == 1)
+        {
+            ArrayList<Purchase> array = new ArrayList<>();
+            customers.forEach(customer -> customer.getPurchases()
+                      .forEach(purchase -> purchase.getItems()
+                                .forEach((product, integer) -> {
+                                    if (product.getShopName()
+                                               .equals(shops.get(getLoggedUserLocation())
+                                                            .getShopName()))
+                                    {
+                                        array.add(purchase);
+                                    }
+                                })));
+            return array;
+        }
+        else
+        {
+            return customers.get(getLoggedUserLocation()).getPurchases();
+        }
     }
 
     public Settings getSettings()
