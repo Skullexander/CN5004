@@ -20,6 +20,7 @@ public class Main
     public void start(Stage primaryStage)
         throws IOException
     {
+        HostServicesProvider.INSTANCE.init(getHostServices());
         stage = primaryStage;
         stage.setTitle("CN5004 - Ordering Application");
         isStageResizeable(false);
