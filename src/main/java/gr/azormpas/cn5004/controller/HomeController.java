@@ -29,7 +29,7 @@ public class HomeController
 
     public void initialize()
     {
-        txtName.setText(Main.data.getSettings().getLoadedUser().getUsername().toUpperCase());
+        txtName.setText(getUsername());
         checkType();
         if (type.equals("shop"))
         {
@@ -44,6 +44,21 @@ public class HomeController
             btnProductList.setVisible(false);
         }
         boxOptions.getChildren().removeIf(node -> !node.isVisible());
+    }
+
+    private String getUsername()
+    {
+        switch (Main.data.getLoggedUserType())
+        {
+            //case(0):
+            //    return Main.data.getSettings().getLoadedUser().getUsername();
+            case(1):
+                return Main.data.getShops().get(Main.data.getLoggedUserLocation()).getShopName();
+            case(2):
+                return Main.data.getCustomers().get(Main.data.getLoggedUserLocation()).getCustomerName();
+            default:
+                return "none";
+        }
     }
 
     private void checkType()
