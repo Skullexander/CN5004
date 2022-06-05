@@ -267,16 +267,25 @@ public class DataController
     {
         ArrayList<Shop> arrayList = new ArrayList<>(3);
 
-        arrayList.add(new Shop("test1", "test1", "Shop1", "retail"));
+        arrayList.add(new Shop("defaultShop1",
+                               "defaultShop1",
+                               "Cursed Trove",
+                               "Retailer"));
         arrayList.get(0).getInventory().add(new Product(arrayList.get(0), "abc", 2.5, true));
-        arrayList.get(0).getInventory().add(new Product(arrayList.get(0), "def", 12.45672));
+        arrayList.get(0).getInventory().add(new Product(arrayList.get(0), "def", 12.45672, true));
 
-        arrayList.add(new Shop("test3", "test3", "Shop2", "producer"));
+        arrayList.add(new Shop("defaultShop2",
+                               "defaultShop2",
+                               "Death and Taxes",
+                               "Producer"));
         arrayList.get(1).getInventory().add(new Product(arrayList.get(1), "ghi", 0.54, true));
         arrayList.get(1).getInventory().add(new Product(arrayList.get(1), "jkl", 4.57, true));
 
-        arrayList.add(new Shop("test5", "test5", "Shop3", "mixed"));
-        arrayList.get(2).getInventory().add(new Product(arrayList.get(2), "mno", 1));
+        arrayList.add(new Shop("defaultShop3",
+                               "defaultShop3",
+                               "Lorem Ipsum",
+                               "Mixed"));
+        arrayList.get(2).getInventory().add(new Product(arrayList.get(2), "mno", 1, true));
         arrayList.get(2).getInventory().add(new Product(arrayList.get(2), "pqr", 27.645, true));
 
         return arrayList;
@@ -286,17 +295,38 @@ public class DataController
     {
         ArrayList<Customer> arrayList = new ArrayList<>(3);
 
-        arrayList.add(new Customer("test2", "test2", "George"));
-        arrayList.get(0).getPurchases().add(new Purchase(arrayList.get(0), 5, DEFAULT_SHOPS.get(0).getInventory().get(0), 15));
-        arrayList.get(0).getPurchases().add(new Purchase(arrayList.get(0), 4, DEFAULT_SHOPS.get(0).getInventory().get(1), 20.4));
+        arrayList.add(
+            new Customer("defaultCustomer1",
+                         "defaultCustomer1",
+                         "George Bush",
+                         "Blvd. Str. 83",
+                         "United States of America"));
+        arrayList.get(0).getPurchases().add(
+            new Purchase(arrayList.get(0), 5, DEFAULT_SHOPS.get(0).getInventory().get(0), 15));
+        arrayList.get(0).getPurchases().add(
+            new Purchase(arrayList.get(0), 4, DEFAULT_SHOPS.get(1).getInventory().get(0), 20.4));
 
-        arrayList.add(new Customer("test4", "test4", "Mary"));
-        arrayList.get(1).getPurchases().add(new Purchase(arrayList.get(1), 1, DEFAULT_SHOPS.get(1).getInventory().get(0), 4.535));
-        arrayList.get(1).getPurchases().add(new Purchase(arrayList.get(1), 12, DEFAULT_SHOPS.get(1).getInventory().get(1), 8.5));
+        arrayList.add(
+            new Customer("defaultCustomer2",
+                         "defaultCustomer2",
+                         "Mary Hilton",
+                         "Hilton Hotel",
+                         "Italy"));
+        arrayList.get(1).getPurchases().add(
+            new Purchase(arrayList.get(1), 1, DEFAULT_SHOPS.get(1).getInventory().get(1), 4.535));
+        arrayList.get(1).getPurchases().add(
+            new Purchase(arrayList.get(1), 12, DEFAULT_SHOPS.get(2).getInventory().get(1), 8.5));
 
-        arrayList.add(new Customer("test6", "test6", "David"));
-        arrayList.get(2).getPurchases().add(new Purchase(arrayList.get(2), 7, DEFAULT_SHOPS.get(2).getInventory().get(0), 32.4));
-        arrayList.get(2).getPurchases().add(new Purchase(arrayList.get(2), 5047, DEFAULT_SHOPS.get(2).getInventory().get(1), 127.1057542));
+        arrayList.add(
+            new Customer("defaultCustomer3",
+                         "defaultCustomer3",
+                         "David Copperfield",
+                         "Fourth Dimension",
+                         "Belgium"));
+        arrayList.get(2).getPurchases().add(
+            new Purchase(arrayList.get(2), 7, DEFAULT_SHOPS.get(2).getInventory().get(0), 32.4));
+        arrayList.get(2).getPurchases().add(
+            new Purchase(arrayList.get(2), 5047, DEFAULT_SHOPS.get(0).getInventory().get(1), 127.1057542));
 
         return arrayList;
     }
