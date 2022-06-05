@@ -28,7 +28,7 @@ public class LoginController
     @FXML
     public void initialize()
     {
-        System.out.println("################ LOGIN SCREEN ################");
+        System.out.println("[ VIEW ]################[ LOGIN SCREEN ]################[ VIEW ]");
         try
         {
             Main.data.loadData();
