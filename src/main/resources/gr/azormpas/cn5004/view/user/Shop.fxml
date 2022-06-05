@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" spacing="5.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Separator orientation="VERTICAL" />
+      <VBox spacing="10.0">
+         <children>
+            <Label contentDisplay="RIGHT" graphicTextGap="9.0" text="Shop Name">
+               <graphic>
+                  <TextField fx:id="fldShopName" prefWidth="150.0" promptText="(Required)" />
+               </graphic>
+            </Label>
+            <Label contentDisplay="RIGHT" graphicTextGap="16.0" text="Shop Type">
+               <graphic>
+                  <ChoiceBox fx:id="btnType" prefWidth="150.0" />
+               </graphic>
+            </Label>
+            <Label contentDisplay="RIGHT" graphicTextGap="37.0" text="Details">
+               <graphic>
+                  <TextArea fx:id="fldDetails" prefHeight="100.0" prefWidth="150.0" promptText="(Optional)" wrapText="true" />
+               </graphic>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>
