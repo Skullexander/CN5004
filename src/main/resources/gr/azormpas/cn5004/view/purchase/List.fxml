@@ -14,6 +14,7 @@
       <TableView fx:id="table" fixedCellSize="30.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="tableID" editable="false" minWidth="30.0" text="ID" />
+            <TableColumn fx:id="tableName" editable="false" minWidth="30.0" text="Name" />
             <TableColumn fx:id="tableDate" editable="false" minWidth="30.0" text="Date" />
             <TableColumn fx:id="tableItems" editable="false" minWidth="30.0" text="Items" />
             <TableColumn fx:id="tableCost" editable="false" minWidth="30.0" text="Cost" />
