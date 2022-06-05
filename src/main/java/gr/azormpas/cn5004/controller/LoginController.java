@@ -20,6 +20,8 @@ public class LoginController
     private CheckBox chkRemember;
     @FXML
     private CheckBox chkDefaultData;
+    @FXML
+    private Hyperlink hyperlinkGit;
 
     @FXML
     public void initialize()
@@ -87,6 +89,16 @@ public class LoginController
         }
     }
 
+    public void viewRegister(ActionEvent ignoredEvent)
+        throws IOException
+    {
+        Main.loadScene("Register");
+    }
+
+    public void gotoProject(ActionEvent ignoredEvent)
+    {
+        HostServicesProvider.INSTANCE.getHostServices().showDocument(hyperlinkGit.getText());
+    }
     private void rememberUser()
     {
         Main.data.getSettings().getLoadedUser().setUsername(fldUsername.getText());
